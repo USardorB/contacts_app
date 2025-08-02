@@ -1,4 +1,4 @@
-import '../../domain/entities/geo_entity.dart';
+import '../../../domain/entities/geo_entity.dart';
 
 class GeoModel extends GeoEntity{
   GeoModel(

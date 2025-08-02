@@ -1,4 +1,4 @@
-import '../../domain/entities/user_entity.dart';
+import '../../../domain/entities/user_entity.dart';
 import 'address_model.dart';
 import 'company_model.dart';
 import 'geo_model.dart';
