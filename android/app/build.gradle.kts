@@ -1,3 +1,4 @@
+apply plugin: 'com.google.gms.google-services'
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -9,6 +10,11 @@ android {
     namespace = "uz.astradevsinterns.contacts_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+
+    defaultConfig {
+        minSdkVersion 21
+    }
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

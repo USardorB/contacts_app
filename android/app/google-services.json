@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "327912935738",
+    "project_id": "contact-app-216b1",
+    "storage_bucket": "contact-app-216b1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327912935738:android:af81ab12a350ce0116c003",
+        "android_client_info": {
+          "package_name": "com.example.contact"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRxVS--HcE44Qc56f5l81bRFtn_gBYioo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327912935738:android:a9a086802ea5dc7a16c003",
+        "android_client_info": {
+          "package_name": "uz.astradevsinterns.contacts_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRxVS--HcE44Qc56f5l81bRFtn_gBYioo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
