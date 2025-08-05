@@ -9,25 +9,25 @@ class UserModel extends UserEntity{
     required String name,
     required String email,
     required String phone,
-    String? website,
-    AddressModel? address,
-    GeoModel? geo,
-    CompanyModel? company,
+     required String website,
+   required AddressModel address,
+    required  GeoModel geo,
+    required CompanyModel company,
   }) : super(id: id,name: name,email: email,phone: phone,website: website,address: address,geo: geo,company: company);
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    final addressJson = json['address'] ?? {};
+    final geoJson = addressJson['geo'] ?? {};
+    
     return UserModel(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
-      website: json['website'],
-      address: AddressModel.fromJson(
-        json['address'],
-      ),
-      geo: GeoModel.fromJson(json['address']['geo']),
-      company: CompanyModel.fromJson(json['company']),
-      
+      id: json['id']?.toInt() ?? 0,
+      name: json['name']?.toString() ?? '',
+      email: json['email']?.toString() ?? '',
+      phone: json['phone']?.toString() ?? '',
+      website: json['website']?.toString() ?? '',
+      address: AddressModel.fromJson(addressJson),
+      geo: GeoModel.fromJson(geoJson),
+      company: CompanyModel.fromJson(json['company'] ?? {}),
     );
   }
 
@@ -38,7 +38,7 @@ class UserModel extends UserEntity{
       'name': name,
       'email': email,
       'phone': phone,
-      'website': website,
+      'website': website, 
       'address': (address as AddressModel).toJson(),
       'company': (company as CompanyModel).toJson(),
     };

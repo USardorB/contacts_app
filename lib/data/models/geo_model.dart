@@ -7,7 +7,10 @@ class GeoModel extends GeoEntity{
   ) : super(lat,lng);
 
   factory GeoModel.fromJson(Map<String, dynamic> json) {
-    return GeoModel(lat: json['lat'],lng: json['lng']);
+    return GeoModel(
+      lat: json['lat']?.toString() ?? '',
+      lng: json['lng']?.toString() ?? '',
+    );
   }
 
   Map<String, dynamic> toJson() {

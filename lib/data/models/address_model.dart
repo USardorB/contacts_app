@@ -12,11 +12,11 @@ class AddressModel extends AddressEntity{
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
     return AddressModel(
-      street: json['street'],
-      suite: json['suite'],
-      city: json['city'],
-      zipcode: json['zipcode'],
-      geo: GeoModel.fromJson(json['geo']),
+      street: json['street']?.toString() ?? '',
+      suite: json['suite']?.toString() ?? '',
+      city: json['city']?.toString() ?? '',
+      zipcode: json['zipcode']?.toString() ?? '',
+      geo: GeoModel.fromJson(json['geo'] ?? {}),
     );
   }
 

@@ -7,19 +7,19 @@ class UserEntity {
   final String name;
   final String email;
   final String phone;
-  final String? website;
-  final AddressEntity? address;
-  final CompanyEntity? company;
-  final GeoEntity? geo;
+  final String website;
+  final AddressEntity address;
+  final CompanyEntity company;
+  final GeoEntity geo;
 
   const UserEntity({
     required this.id,
     required this.name,
     required this.email,
     required this.phone,
-    this.website,
-    this.address,
-    this.company,
-    this.geo,
+    required this.website,
+   required this.address,
+   required this.company,
+   required this.geo,
   });
 }
