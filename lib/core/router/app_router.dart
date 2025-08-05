@@ -1,3 +1,4 @@
+import 'package:contacts_app/presentation/pages/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../feature/auth/presentation/pages/login_page.dart';
 import '../../feature/auth/presentation/pages/sing_up_page.dart';
 import '../../feature/auth/presentation/pages/welcome_page.dart';
-import '../../feature/contacts/presentation/pages/contacts_page.dart';
 import 'route_name.dart';
 import 'routes.dart';
 
@@ -18,8 +18,7 @@ class AppRouter {
     initialLocation: RoutePaths.welcome,
     redirect: (context, state) async {
       final user = FirebaseAuth.instance.currentUser;
-      final loggingInOrSigningUp =
-          state.uri.path == RoutePaths.login ||
+      final loggingInOrSigningUp = state.uri.path == RoutePaths.login ||
           state.uri.path == RoutePaths.singUp;
 
       // Get current welcome page state from SharedPreferences
@@ -47,11 +46,12 @@ class AppRouter {
           (state.uri.path == RoutePaths.login ||
               state.uri.path == RoutePaths.singUp ||
               state.uri.path == RoutePaths.welcome)) {
-        return RoutePaths.contacts;
+        return RoutePaths.home;
       }
 
       return null;
     },
+    
     routes: [
       GoRoute(
         name: RouteNames.welcome,
@@ -69,9 +69,9 @@ class AppRouter {
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        name: RouteNames.contacts,
-        path: RoutePaths.contacts,
-        builder: (context, state) => const ContactsPage(),
+        name: RouteNames.home,
+        path: RoutePaths.home,
+        builder: (context, state) => const Home(),
       ),
     ],
   );
