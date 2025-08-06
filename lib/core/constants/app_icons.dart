@@ -4,4 +4,5 @@ sealed class AppIcons {
   static const String personIcon = 'assets/icons/person_icon.svg';
   static const String phoneIcon = 'assets/icons/phone_icon.svg';
   static const String threePoint = 'assets/icons/three_point.svg';
+  static const String smsIcon = 'assets/icons/sms_icon.svg';
 }

@@ -1,4 +1,4 @@
-import 'package:contacts_app/presentation/pages/home/home.dart';
+import 'package:contacts_app/feature/auth/presentation/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

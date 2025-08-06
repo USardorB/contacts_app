@@ -36,10 +36,10 @@ class NetworkServiceImpl extends NetworkService {
   Future<dynamic> get(String endPoint, {Map<String, String>? headers}) async {
     try {
       final response = await client.get(
-        Uri.parse('$baseUrl$endPoint'), 
+        Uri.parse('$baseUrl$endPoint'),
         headers: headers ?? this.headers,
       );
-      
+
       if (response.statusCode == 200) {
         // ✅ dynamic qaytaradi, UserModel emas!
         return jsonDecode(response.body);
@@ -64,7 +64,6 @@ class NetworkServiceImpl extends NetworkService {
     throw UnimplementedError();
   }
 
-
   static const List<String> pictureUrl = [
     "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww",
     'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
@@ -76,5 +75,18 @@ class NetworkServiceImpl extends NetworkService {
     'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGVyc29ufGVufDB8fDB8fHww',
     'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGVyc29ufGVufDB8fDB8fHww',
     'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGVyc29ufGVufDB8fDB8fHww',
+  ];
+
+  static const List<String> times = [
+    '2 minutes ago',
+    '15 minutes ago',
+    '20 minutes ago',
+    '25 minutes ago',
+    '30 minutes ago',
+    "40 minutes ago",
+    '45 minutes ago',
+    '1 hour ago',
+    '2 hour ago',
+    '3 hour ago',
   ];
 }

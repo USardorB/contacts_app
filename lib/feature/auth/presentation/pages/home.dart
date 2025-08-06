@@ -2,30 +2,9 @@ import 'package:contacts_app/core/constants/app_icons.dart';
 import 'package:contacts_app/data/datasources/remote/network_service.dart';
 import 'package:contacts_app/data/datasources/remote_data_sources.dart';
 import 'package:contacts_app/data/models/user_model.dart';
-import 'package:contacts_app/presentation/widgets/custom_navbar.dart';
+import 'package:contacts_app/feature/auth/presentation/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(
-    MyApp(),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Home(),
-    );
-  }
-}
 
 class Home extends StatefulWidget {
   const Home({super.key});

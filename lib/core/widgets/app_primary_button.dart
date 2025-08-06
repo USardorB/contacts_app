@@ -22,7 +22,7 @@ class AppPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool clickable = !isDisabled && !isLoading;
-
+    
     return SizedBox(
       width: double.infinity,
       height: height ?? 48.h,
