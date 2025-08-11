@@ -8,6 +8,8 @@ class ReminderModel extends ReminderEntity {
     required super.dateTime,
     super.isCompleted,
     required super.createdAt,
+    super.personId,
+    super.personName,
   });
 
   factory ReminderModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,8 @@ class ReminderModel extends ReminderEntity {
       isCompleted: json['isCompleted'] ?? false,
       createdAt:
           DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
+      personId: json['personId']?.toString(),
+      personName: json['personName']?.toString(),
     );
   }
 
@@ -31,6 +35,8 @@ class ReminderModel extends ReminderEntity {
       'dateTime': dateTime.toIso8601String(),
       'isCompleted': isCompleted,
       'createdAt': createdAt.toIso8601String(),
+      'personId': personId,
+      'personName': personName,
     };
   }
 
@@ -38,6 +44,8 @@ class ReminderModel extends ReminderEntity {
     required String title,
     required String description,
     required DateTime dateTime,
+    String? personId,
+    String? personName,
   }) {
     return ReminderModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -45,6 +53,8 @@ class ReminderModel extends ReminderEntity {
       description: description,
       dateTime: dateTime,
       createdAt: DateTime.now(),
+      personId: personId,
+      personName: personName,
     );
   }
 }

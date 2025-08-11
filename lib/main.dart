@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -18,6 +17,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final prefs = await SharedPreferences.getInstance();
   final hasSeenWelcome = prefs.getBool('hasSeenWelcome') ?? false;
+  
   runApp(
     ChangeNotifierProvider(
       create: (context) => themeService,

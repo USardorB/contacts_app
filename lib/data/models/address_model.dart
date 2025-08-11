@@ -3,12 +3,12 @@ import 'geo_model.dart';
 
 class AddressModel extends AddressEntity{
   const AddressModel({
-    required String street,
-    required String suite,
-    required String city,   
-    required String zipcode,
-    required GeoModel geo,
-  }) : super(street: street, suite: suite, city: city, zipcode: zipcode, geo: geo);
+    required super.street,
+    required super.suite,
+    required super.city,   
+    required super.zipcode,
+    required GeoModel super.geo,
+  });
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
     return AddressModel(

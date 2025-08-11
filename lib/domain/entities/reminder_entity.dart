@@ -5,6 +5,8 @@ class ReminderEntity {
   final DateTime dateTime;
   final bool isCompleted;
   final DateTime createdAt;
+  final String? personId;
+  final String? personName;
 
   const ReminderEntity({
     required this.id,
@@ -13,6 +15,8 @@ class ReminderEntity {
     required this.dateTime,
     this.isCompleted = false,
     required this.createdAt,
+    this.personId,
+    this.personName,
   });
 
   ReminderEntity copyWith({
@@ -22,6 +26,8 @@ class ReminderEntity {
     DateTime? dateTime,
     bool? isCompleted,
     DateTime? createdAt,
+    String? personId,
+    String? personName,
   }) {
     return ReminderEntity(
       id: id ?? this.id,
@@ -30,6 +36,8 @@ class ReminderEntity {
       dateTime: dateTime ?? this.dateTime,
       isCompleted: isCompleted ?? this.isCompleted,
       createdAt: createdAt ?? this.createdAt,
+      personId: personId ?? this.personId,
+      personName: personName ?? this.personName,
     );
   }
 }

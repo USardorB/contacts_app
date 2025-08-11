@@ -32,38 +32,26 @@ class _ReminderPageState extends State<ReminderPage> {
   }
 
   Future<void> _loadReminders() async {
+    if (!mounted) return;
     setState(() {
       _isLoading = true;
     });
 
     try {
       final reminders = await _reminderService.getReminders();
+      if (!mounted) return;
       setState(() {
         _reminders = reminders;
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
       });
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error loading reminders: $e')),
-        );
-      }
-    }
-  }
-
-  Future<void> _toggleReminderCompletion(String id) async {
-    try {
-      final success = await _reminderService.toggleReminderCompletion(id);
-      if (success) {
-        await _loadReminders();
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error updating reminder: $e')),
         );
       }
     }
@@ -115,6 +103,7 @@ class _ReminderPageState extends State<ReminderPage> {
   void _editReminder(ReminderModel reminder) {
     // TODO: Implement edit functionality
     // For now, just show a snackbar
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Edit functionality coming soon!')),
     );
@@ -197,8 +186,6 @@ class _ReminderPageState extends State<ReminderPage> {
                             final reminder = _reminders[index];
                             return ReminderCardWidget(
                               reminder: reminder,
-                              onToggleCompletion: () =>
-                                  _toggleReminderCompletion(reminder.id),
                               onDelete: () => _deleteReminder(reminder.id),
                               onEdit: () => _editReminder(reminder),
                             );

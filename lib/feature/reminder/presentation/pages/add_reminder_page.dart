@@ -1,6 +1,9 @@
 import 'package:contacts_app/core/theme/app_colors.dart';
 import 'package:contacts_app/core/theme/app_fonts.dart';
+import 'package:contacts_app/data/datasources/remote/network_service.dart';
+import 'package:contacts_app/data/datasources/remote_data_sources.dart';
 import 'package:contacts_app/data/models/reminder_model.dart';
+import 'package:contacts_app/data/models/user_model.dart';
 import 'package:contacts_app/feature/reminder/data/reminder_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,16 +21,47 @@ class _AddReminderPageState extends State<AddReminderPage> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _reminderService = ReminderService();
+  final _userDataSource = UserRemoteDataSourceImpl(
+    NetworkServiceImpl(baseUrl: 'https://jsonplaceholder.typicode.com'),
+  );
 
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
+  UserModel? _selectedPerson;
+  List<UserModel> _availableUsers = [];
   bool _isLoading = false;
+  bool _isLoadingUsers = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsers();
+  }
 
   @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadUsers() async {
+    try {
+      final users = await _userDataSource.getAllUsers();
+      setState(() {
+        _availableUsers = users;
+        _isLoadingUsers = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoadingUsers = false;
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error loading contacts: $e')),
+        );
+      }
+    }
   }
 
   Future<void> _selectDate() async {
@@ -56,10 +90,58 @@ class _AddReminderPageState extends State<AddReminderPage> {
     }
   }
 
+  Future<void> _selectPerson() async {
+    final UserModel? selected = await showDialog<UserModel>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Select Person to Remind'),
+        content: SizedBox(
+          width: double.maxFinite,
+          height: 300,
+          child: ListView.builder(
+            itemCount: _availableUsers.length,
+            itemBuilder: (context, index) {
+              final user = _availableUsers[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    NetworkServiceImpl.getProfileImage(index),
+                  ),
+                ),
+                title: Text(user.name),
+                subtitle: Text(user.company.name),
+                onTap: () => Navigator.of(context).pop(user),
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+
+    if (selected != null) {
+      setState(() {
+        _selectedPerson = selected;
+      });
+    }
+  }
+
   Future<void> _saveReminder() async {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter a title for the reminder')),
+      );
+      return;
+    }
+
+    if (_selectedPerson == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a person to remind')),
       );
       return;
     }
@@ -81,13 +163,15 @@ class _AddReminderPageState extends State<AddReminderPage> {
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
         dateTime: dateTime,
+        personId: _selectedPerson!.id.toString(),
+        personName: _selectedPerson!.name,
       );
 
       final success = await _reminderService.addReminder(reminder);
 
       if (success) {
         if (mounted) {
-          context.pop(true); // Return true to indicate success
+          context.pop(true);
         }
       } else {
         if (mounted) {
@@ -160,6 +244,54 @@ class _AddReminderPageState extends State<AddReminderPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                   borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            24.verticalSpace,
+
+            // Person Selector
+            Text(
+              "Person to Remind",
+              style: AppFonts.semibold14(
+                color: AppColors.black,
+                font: AppFontFamily.poppins,
+              ),
+            ),
+            8.verticalSpace,
+            GestureDetector(
+              onTap: _isLoadingUsers ? null : _selectPerson,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.person, color: Colors.grey.shade600),
+                    10.horizontalSpace,
+                    Expanded(
+                      child: _isLoadingUsers
+                          ? Text('Loading contacts...',
+                              style: TextStyle(color: Colors.grey.shade500))
+                          : _selectedPerson != null
+                              ? Text(
+                                  _selectedPerson!.name,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                )
+                              : Text(
+                                  'Select a person to remind',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey.shade500,
+                                  ),
+                                ),
+                    ),
+                    Icon(Icons.arrow_drop_down, color: Colors.grey.shade600),
+                  ],
                 ),
               ),
             ),
@@ -261,7 +393,8 @@ class _AddReminderPageState extends State<AddReminderPage> {
             ),
 
             // Preview Section
-            if (_titleController.text.isNotEmpty) ...[
+            if (_titleController.text.isNotEmpty &&
+                _selectedPerson != null) ...[
               32.verticalSpace,
               Container(
                 padding: EdgeInsets.all(16.w),
@@ -311,6 +444,13 @@ class _AddReminderPageState extends State<AddReminderPage> {
                                         AppColors.black.withValues(alpha: 0.7),
                                   ),
                                 ),
+                              Text(
+                                'Remind: ${_selectedPerson!.name}',
+                                style: AppFonts.regular14(
+                                  font: AppFontFamily.poppins,
+                                  color: Colors.blue.shade600,
+                                ),
+                              ),
                               Text(
                                 DateFormat('MMM dd, yyyy at h:mm a').format(
                                   DateTime(
