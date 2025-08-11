@@ -1,4 +1,4 @@
-import '../../../domain/entities/company_entity.dart';
+import '../../domain/entities/company_entity.dart';
 
 class CompanyModel extends CompanyEntity{
   @override
