@@ -1,8 +1,8 @@
 import 'package:contacts_app/core/constants/app_icons.dart';
-import 'package:contacts_app/presentation/pages/home/pages/calendar_tab.dart';
+import 'package:contacts_app/feature/reminder/presentation/pages/reminder_page.dart';
 import 'package:contacts_app/presentation/pages/home/pages/home_tab.dart';
 import 'package:contacts_app/presentation/pages/home/pages/phone_tab.dart';
-import 'package:contacts_app/presentation/pages/home/pages/profile_tab.dart';
+import 'package:contacts_app/feature/profile/presentation/pages/profile_page.dart';
 import 'package:contacts_app/presentation/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -102,7 +102,7 @@ class _HomeState extends State<Home> {
               index: 2,
               selectedIndex: _selectedIndex,
             ),
-            label: "Calendar",
+            label: "Reminder",
           ),
           BottomNavigationBarItem(
             icon: CustomNavbar(
@@ -121,8 +121,8 @@ class _HomeState extends State<Home> {
         children: [
           HomeTab(),
           PhoneTab(),
-          CalendarTab(),
-          ProfileTab(),
+          ReminderPage(),
+          ProfilePage(),
         ],
       ),
     );

@@ -17,7 +17,7 @@ class WelcomePage extends StatelessWidget {
 
     // Navigate to login page
     if (context.mounted) {
-      context.go(RoutePaths.login);
+      context.push(RoutePaths.login);
     }
   }
 

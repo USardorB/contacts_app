@@ -8,4 +8,6 @@ class RouteNames {
   static const String contacts = 'contacts';
   static const String contactDetail = 'contactDetail';
   static const String contactAdd = 'contactAdd';
+  static const String reminder = 'reminder';
+  static const String addReminder = 'addReminder';
 }

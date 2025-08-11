@@ -23,28 +23,30 @@ class AppPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool clickable = !isDisabled && !isLoading;
 
-    return SizedBox(
-      width: double.infinity,
-      height: height ?? 48.h,
-      child: ElevatedButton(
-        onPressed: clickable ? onPressed : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: clickable ? AppColors.black : AppColors.disabled,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(60.r),
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.7,
+        height: height ?? 54.h,
+        child: ElevatedButton(
+          onPressed: clickable ? onPressed : null,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: clickable ? AppColors.black : AppColors.disabled,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.r),
+            ),
+            elevation: 0,
           ),
-          elevation: 0,
+          child: isLoading
+              ? SizedBox(
+                  height: 20.r,
+                  width: 20.r,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.w,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+              : Text(title, style: AppFonts.regular36()),
         ),
-        child: isLoading
-            ? SizedBox(
-                height: 20.r,
-                width: 20.r,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.w,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-              )
-            : Text(title, style: AppFonts.regular36()),
       ),
     );
   }
