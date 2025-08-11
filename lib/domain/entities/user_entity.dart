@@ -4,6 +4,7 @@ import 'geo_entity.dart';
 
 class UserEntity {
   final int id;
+  final int indexUrl;
   final String name;
   final String email;
   final String phone;
@@ -13,13 +14,14 @@ class UserEntity {
   final GeoEntity geo;
 
   const UserEntity({
+    required this.indexUrl,
     required this.id,
     required this.name,
     required this.email,
     required this.phone,
     required this.website,
-   required this.address,
-   required this.company,
-   required this.geo,
+    required this.address,
+    required this.company,
+    required this.geo,
   });
 }
