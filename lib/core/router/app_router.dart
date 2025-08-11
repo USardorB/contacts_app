@@ -1,3 +1,5 @@
+import 'package:contacts_app/feature/reminder/presentation/pages/add_reminder_page.dart';
+import 'package:contacts_app/feature/reminder/presentation/pages/reminder_page.dart';
 import 'package:contacts_app/presentation/pages/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +53,6 @@ class AppRouter {
 
       return null;
     },
-    
     routes: [
       GoRoute(
         name: RouteNames.welcome,
@@ -72,6 +73,16 @@ class AppRouter {
         name: RouteNames.home,
         path: RoutePaths.home,
         builder: (context, state) => const Home(),
+      ),
+      GoRoute(
+        name: RouteNames.reminder,
+        path: RoutePaths.reminder,
+        builder: (context, state) => const ReminderPage(),
+      ),
+      GoRoute(
+        name: RouteNames.addReminder,
+        path: RoutePaths.addReminder,
+        builder: (context, state) => const AddReminderPage(),
       ),
     ],
   );

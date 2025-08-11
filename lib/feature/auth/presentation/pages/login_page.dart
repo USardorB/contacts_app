@@ -49,13 +49,11 @@ class _LoginPageState extends State<LoginPage> {
         passwordController.text.trim(),
       );
 
-      // Clear form
       emailController.clear();
       passwordController.clear();
 
-      // Navigate to contacts page (router will handle this automatically)
       if (mounted) {
-        context.go('/contacts');
+        context.go(RoutePaths.home);
       }
     } on AuthException catch (e) {
       setState(() {
@@ -95,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
             content: Text(
               'Password reset email sent. Please check your inbox.',
             ),
-            backgroundColor: Colors.green,
+            backgroundColor: AppColors.green,
           ),
         );
       }
@@ -120,14 +118,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title section
           Padding(
             padding: EdgeInsets.only(left: 32.w, top: 24.h),
             child: Text(
@@ -143,8 +139,7 @@ class _LoginPageState extends State<LoginPage> {
               style: AppFonts.regular14(color: AppColors.lightGrey),
             ),
           ),
-
-          // Image background + form section
+          56.verticalSpace,
           Expanded(
             child: Container(
               width: double.infinity,
@@ -161,14 +156,12 @@ class _LoginPageState extends State<LoginPage> {
                     CustomTextField(
                       hint: 'Enter your email',
                       controller: emailController,
-                      prefixIcon: Icons.email_outlined,
                     ),
                     SizedBox(height: 16.h),
                     CustomTextField(
                       hint: 'Enter your password',
                       controller: passwordController,
                       obscureText: true,
-                      prefixIcon: Icons.lock_outline,
                     ),
                     SizedBox(height: 32.h),
                     AppPrimaryButton(
@@ -182,10 +175,10 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.infinity,
                         padding: EdgeInsets.all(12.w),
                         decoration: BoxDecoration(
-                          color: AppColors.red.withOpacity(0.1),
+                          color: AppColors.red.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8.r),
                           border: Border.all(
-                            color: AppColors.red.withOpacity(0.3),
+                            color: AppColors.red.withValues(alpha: 0.3),
                           ),
                         ),
                         child: Text(
@@ -211,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 16.h),
                     Center(
                       child: GestureDetector(
-                        onTap: () => context.go(RoutePaths.singUp),
+                        onTap: () => context.push(RoutePaths.singUp),
                         child: RichText(
                           text: TextSpan(
                             text: 'Don\'t have an account? ',

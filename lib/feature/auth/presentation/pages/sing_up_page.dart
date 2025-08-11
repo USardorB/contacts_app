@@ -1,3 +1,5 @@
+import 'package:contacts_app/core/constants/app_images.dart';
+import 'package:contacts_app/core/router/routes.dart';
 import 'package:contacts_app/core/theme/app_colors.dart';
 import 'package:contacts_app/core/theme/app_fonts.dart';
 import 'package:contacts_app/core/widgets/app_primary_button.dart';
@@ -56,9 +58,8 @@ class _SignUpPageState extends State<SignUpPage> {
       emailController.clear();
       passwordController.clear();
 
-      // Navigate to contacts page (router will handle this automatically)
       if (mounted) {
-        context.go('/contacts');
+        context.go(RoutePaths.home);
       }
     } on AuthException catch (e) {
       setState(() {
@@ -81,85 +82,93 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
         backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Create Account',
-              style: AppFonts.bold30(color: AppColors.black),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              'Please fill in the details below',
-              style: AppFonts.regular14(color: AppColors.lightGrey),
-            ),
-            SizedBox(height: 32.h),
-            CustomTextField(
-              hint: 'Enter your full name',
-              controller: nameController,
-              prefixIcon: Icons.person_outline,
-            ),
-            SizedBox(height: 16.h),
-            CustomTextField(
-              hint: 'Enter your email',
-              controller: emailController,
-              prefixIcon: Icons.email_outlined,
-            ),
-            SizedBox(height: 16.h),
-            CustomTextField(
-              hint: 'Enter your password',
-              controller: passwordController,
-              obscureText: true,
-              prefixIcon: Icons.lock_outline,
-            ),
-            SizedBox(height: 32.h),
-            AppPrimaryButton(
-              title: 'Sign Up',
-              onPressed: isLoading ? null : signUp,
-              isLoading: isLoading,
-            ),
-            SizedBox(height: 16.h),
-            if (errorMessage != null)
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(12.w),
-                decoration: BoxDecoration(
-                  color: AppColors.red.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(color: AppColors.red.withOpacity(0.3)),
-                ),
-                child: Text(
-                  errorMessage!,
-                  textAlign: TextAlign.center,
-                  style: AppFonts.regular14(color: AppColors.red),
-                ),
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(24.w),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(AppImages.signUpBg),
+                fit: BoxFit.fill,
               ),
-            const Spacer(),
-            Center(
-              child: GestureDetector(
-                onTap: () => context.go('/login'),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Already have an account? ',
-                    style: AppFonts.regular14(color: AppColors.lightGrey),
-                    children: [
-                      TextSpan(
-                        text: 'Login',
-                        style: AppFonts.medium14(color: AppColors.black),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Create Account :)',
+                  style: AppFonts.bold30(color: AppColors.black),
+                ),
+                8.verticalSpace,
+                Text(
+                  'Please fill in the details below',
+                  style: AppFonts.regular14(color: AppColors.lightGrey),
+                ),
+                32.verticalSpace,
+                CustomTextField(
+                  hint: 'Enter your full name',
+                  controller: nameController,
+                ),
+                16.verticalSpace,
+                CustomTextField(
+                  hint: 'Enter your email',
+                  controller: emailController,
+                ),
+                SizedBox(height: 16.h),
+                CustomTextField(
+                  hint: 'Enter your password',
+                  controller: passwordController,
+                  obscureText: true,
+                ),
+                200.verticalSpace,
+                AppPrimaryButton(
+                  title: 'Sign Up',
+                  onPressed: isLoading ? null : signUp,
+                  isLoading: isLoading,
+                ),
+                16.verticalSpace,
+                if (errorMessage != null)
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      color: AppColors.red.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(
+                          color: AppColors.red.withValues(alpha: 0.3)),
+                    ),
+                    child: Text(
+                      errorMessage!,
+                      textAlign: TextAlign.center,
+                      style: AppFonts.regular14(color: AppColors.red),
+                    ),
+                  ),
+                16.verticalSpace,
+                Center(
+                  child: GestureDetector(
+                    onTap: () => context.push('/login'),
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Already have an account? ',
+                        style: AppFonts.regular14(color: AppColors.lightGrey),
+                        children: [
+                          TextSpan(
+                            text: 'Login',
+                            style: AppFonts.medium14(color: AppColors.black),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+          const Spacer(flex: 1),
+        ],
       ),
     );
   }
