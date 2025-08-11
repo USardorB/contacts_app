@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:contacts_app/data/models/user_model.dart';
+import 'package:contacts_app/feature/home/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class NetworkService {

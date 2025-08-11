@@ -1,4 +1,4 @@
-import '../../../domain/entities/reminder_entity.dart';
+import '../../domain/entities/reminder_entity.dart';
 
 class ReminderModel extends ReminderEntity {
   const ReminderModel({

@@ -1,6 +1,6 @@
 import 'package:contacts_app/core/theme/app_colors.dart';
 import 'package:contacts_app/core/theme/app_fonts.dart';
-import 'package:contacts_app/data/models/reminder_model.dart';
+import 'package:contacts_app/feature/home/data/models/reminder_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';

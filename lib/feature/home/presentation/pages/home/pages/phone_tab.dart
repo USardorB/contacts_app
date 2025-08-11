@@ -1,9 +1,9 @@
 import 'package:contacts_app/core/constants/app_icons.dart';
 import 'package:contacts_app/core/theme/app_colors.dart';
 import 'package:contacts_app/core/theme/app_fonts.dart';
-import 'package:contacts_app/data/datasources/remote/network_service.dart';
-import 'package:contacts_app/data/datasources/remote_data_sources.dart';
-import 'package:contacts_app/data/models/user_model.dart';
+import 'package:contacts_app/feature/home/data/datasources/remote/network_service.dart';
+import 'package:contacts_app/feature/home/data/datasources/remote_data_sources.dart';
+import 'package:contacts_app/feature/home/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';

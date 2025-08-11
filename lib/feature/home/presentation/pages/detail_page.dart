@@ -1,5 +1,5 @@
 import 'package:contacts_app/core/constants/app_icons.dart';
-import 'package:contacts_app/data/models/user_model.dart';
+import 'package:contacts_app/feature/home/data/models/user_model.dart';
 import 'package:contacts_app/feature/auth/presentation/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

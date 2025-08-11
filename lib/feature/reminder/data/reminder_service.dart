@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../data/models/reminder_model.dart';
+import '../../home/data/models/reminder_model.dart';
 import 'reminder_repository.dart';
 
 class ReminderService {

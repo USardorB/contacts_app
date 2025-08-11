@@ -1,5 +1,5 @@
-import 'package:contacts_app/data/datasources/remote/network_service.dart';
-import 'package:contacts_app/data/models/user_model.dart';
+import 'package:contacts_app/feature/home/data/datasources/remote/network_service.dart';
+import 'package:contacts_app/feature/home/data/models/user_model.dart';
 
 abstract class UserRemoteDataSource {
   Future<List<UserModel>> getAllUsers();

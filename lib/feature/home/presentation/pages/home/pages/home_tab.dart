@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:contacts_app/data/datasources/remote/network_service.dart';
-import 'package:contacts_app/data/models/user_model.dart';
+import 'package:contacts_app/feature/home/data/datasources/remote/network_service.dart';
+import 'package:contacts_app/feature/home/data/models/user_model.dart';
 import 'package:contacts_app/feature/home/presentation/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';

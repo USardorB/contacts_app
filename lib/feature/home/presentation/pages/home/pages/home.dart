@@ -1,7 +1,7 @@
 import 'package:contacts_app/core/constants/app_icons.dart';
-import 'package:contacts_app/data/datasources/remote/network_service.dart';
-import 'package:contacts_app/data/datasources/remote_data_sources.dart';
-import 'package:contacts_app/data/models/user_model.dart';
+import 'package:contacts_app/feature/home/data/datasources/remote/network_service.dart';
+import 'package:contacts_app/feature/home/data/datasources/remote_data_sources.dart';
+import 'package:contacts_app/feature/home/data/models/user_model.dart';
 import 'package:contacts_app/feature/auth/presentation/widgets/custom_navbar.dart';
 import 'package:contacts_app/feature/home/presentation/pages/home/pages/home_tab.dart';
 import 'package:contacts_app/feature/home/presentation/pages/home/pages/phone_tab.dart';

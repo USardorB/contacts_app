@@ -1,4 +1,4 @@
-import '../../../data/models/reminder_model.dart';
+import '../../home/data/models/reminder_model.dart';
 
 class ReminderRepository {
   static List<ReminderModel> getSampleReminders() {

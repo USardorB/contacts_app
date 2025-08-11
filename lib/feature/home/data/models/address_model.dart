@@ -1,4 +1,4 @@
-import '../../../domain/entities/address_entity.dart';
+import '../../domain/entities/address_entity.dart';
 import 'geo_model.dart';
 
 class AddressModel extends AddressEntity{
